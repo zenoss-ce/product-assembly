@@ -86,45 +86,48 @@ def zenpackDownload(versionInfo, outdir, downloadReport):
     #       "url": "http://zenpacks.zenosslabs.com/download/ZenPacks.zenoss.Example-1.0.0.dev2+g0abcdef-py2.7.egg",
     #       "version": "1.0.0.dev2+g0abcdef"
     #   }
-    try:
-        zenpack = json.loads(urllib2.urlopen(url).read())
-    except urllib2.HTTPError as e:
-        artifactInfo["zenpack"] = {
-            "url": e.url,
-            "code": e.code,
-            "reason": e.reason,
-        }
+#    try:
+#        print url
+#        zenpack = json.loads(urllib2.urlopen(url).read())
+#    except urllib2.HTTPError as e:
+#        artifactInfo["zenpack"] = {
+#            "url": e.url,
+#            "code": e.code,
+#            "reason": e.reason,
+#        }
+#
+#        downloadReport.append(artifactInfo)
+#        raise Exception("Error querying for ZP info from %s: %s" % (url, e))
+#    except urllib2.URLError as e:
+#        artifactInfo["zenpack"] = {
+#            "error": str(e),
+#        }
+#        downloadReport.append(artifactInfo)
+#        raise Exception("Error querying for ZP info from %s: %s" % (url, e))
+#    except Exception as e:
+#        artifactInfo["zenpack"] = {
+#            "error": str(e),
+#        }
+#        downloadReport.append(artifactInfo)
+#        raise Exception("Error querying for ZP info from %s: %s" % (url, e))
+#
+#    # Include unaltered response under "zenpack" key in download report.
+#    artifactInfo["zenpack"] = zenpack
+#
+#    if "url" not in zenpack:
+#        artifactInfo["zenpack"] = {
+#            "error": "no url in returned data",
+#        }
+#
+#        downloadReport.append(artifactInfo)
+#        raise Exception(
+#            "No 'url' in zenpack data for artifact {}."
+#                .format(versionInfo["name"]))
+#
+#    downloadReport.append(artifactInfo)
 
-        downloadReport.append(artifactInfo)
-        raise Exception("Error querying for ZP info from %s: %s" % (url, e))
-    except urllib2.URLError as e:
-        artifactInfo["zenpack"] = {
-            "error": str(e),
-        }
-        downloadReport.append(artifactInfo)
-        raise Exception("Error querying for ZP info from %s: %s" % (url, e))
-    except Exception as e:
-        artifactInfo["zenpack"] = {
-            "error": str(e),
-        }
-        downloadReport.append(artifactInfo)
-        raise Exception("Error querying for ZP info from %s: %s" % (url, e))
-
-    # Include unaltered response under "zenpack" key in download report.
-    artifactInfo["zenpack"] = zenpack
-
-    if "url" not in zenpack:
-        artifactInfo["zenpack"] = {
-            "error": "no url in returned data",
-        }
-
-        downloadReport.append(artifactInfo)
-        raise Exception(
-            "No 'url' in zenpack data for artifact {}."
-                .format(versionInfo["name"]))
-
-    downloadReport.append(artifactInfo)
-    downloadArtifact(zenpack["url"], outdir)
+    zurl = "https://download.tuxfamily.org/ach/artifacts/%s-%s-py2.7.egg" % ( versionInfo['name'], versionInfo['requirement'].split('===')[1] )
+    downloadArtifact(zurl, outdir)
 
 
 def urlDownload(versionInfo, outdir, downloadReport):
@@ -423,7 +426,7 @@ class URLDownloadInfo(ArtifactInfo):
     def url(self):
         baseURL = self.info.get('URL')
         if not baseURL:
-            baseURL = 'http://zenpip.zenoss.eng/packages/{name}-{version}.tar.gz'
+            baseURL = 'https://download.tuxfamily.org/ach/artifacts/{name}-{version}.tar.gz'
         kwargs = super(URLDownloadInfo, self).toDict()
         return baseURL.format(**kwargs)
 

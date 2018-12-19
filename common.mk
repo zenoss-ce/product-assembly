@@ -6,7 +6,7 @@ IMAGENAME  = $(TARGET_PRODUCT)_$(SHORT_VERSION)
 
 FROM_IMAGE = product-base:$(VERSION)_$(BUILD_NUMBER)_$(MATURITY)
 
-TAG = zenoss/$(IMAGENAME):$(VERSION)_$(BUILD_NUMBER)_$(MATURITY)
+TAG = zenossce/$(IMAGENAME):$(VERSION)_$(BUILD_NUMBER)_$(MATURITY)
 
 .PHONY: build push clean getDownloadLogs
 

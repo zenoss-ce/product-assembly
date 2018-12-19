@@ -13,14 +13,6 @@
     "ZenPacks.zenoss.Microsoft.Windows"
   ],
   "included_not_installed": [
-    "ZenPacks.zenoss.WBEM",
-    "ZenPacks.zenoss.DellMonitor",
-    "ZenPacks.zenoss.DigMonitor",
-    "ZenPacks.zenoss.DnsMonitor",
-    "ZenPacks.zenoss.FtpMonitor",
-    "ZenPacks.zenoss.HPMonitor",
-    "ZenPacks.zenoss.LDAPMonitor",
-    "ZenPacks.zenoss.ZenJMX"
   ],
   "version_overrides": {}
 }

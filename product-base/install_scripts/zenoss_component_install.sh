@@ -119,6 +119,14 @@ su - zenoss -c "pip install  --use-wheel --no-index  /tmp/zenoss.toolbox*.whl"
 artifactDownload "service-migration"
 su - zenoss -c "pip install  --use-wheel --no-index  /tmp/servicemigration*"
 
+# Enable LDAP Auth
+for p in python-ldap setuptools Products.LDAPUserFolder==2.27 Products.LDAPMultiPlugins
+do
+  echo "# Installing addon $p"
+  su - zenoss -c "easy_install $p"
+done
+#
+
 # Some components have files which are read-only by zenoss, so we need to
 # open up the permissions to allow read/write for the group and read for
 # all others.  We need to make this minimal setting here to facilitate

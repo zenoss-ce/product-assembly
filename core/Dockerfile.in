@@ -1,4 +1,4 @@
-FROM zenoss/%FROM_IMAGE%
+FROM zenossce/%FROM_IMAGE%
 
 # maintener is redundant since base image is ours as well
 #MAINTAINER Zenoss <dev@zenoss.com>
